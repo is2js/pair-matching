@@ -36,7 +36,14 @@ public class InputView {
     public String inputPairMatch() {
         System.out.println(PAIR_MATCH_INSTRUCTION);
         System.out.print(">> ");
-        final String mission = SCANNER.nextLine();
-        return mission;
+        return SCANNER.nextLine();
+    }
+
+    public String inputRematch() {
+        System.out.println(""
+            + "매칭 정보가 있습니다. 다시 매칭하시겠습니까?\n"
+            + "네 | 아니오");
+        final String answer = SCANNER.nextLine();
+        return answer;
     }
 }
