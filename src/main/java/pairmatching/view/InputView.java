@@ -33,7 +33,7 @@ public class InputView {
         return menu;
     }
 
-    public String inputPairMatch() {
+    public String inputPairMission() {
         System.out.println(PAIR_MATCH_INSTRUCTION);
         System.out.print(">> ");
         return SCANNER.nextLine();

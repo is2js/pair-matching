@@ -19,4 +19,8 @@ public enum AnswerMenu {
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("정상적인 답변이 아닙니다. 네 | 아니오 중 하나로 대답해주세요"));
     }
+
+    public boolean isNo() {
+        return this == NO;
+    }
 }

@@ -5,14 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import pairmatching.utils.FileReader;
+import pairmatching.utils.FileReaderUtil;
 
 public class PairProgram {
 
-    private final Map<PairMission, Pairs> pairsPerMission;
+    private Map<PairMission, Pairs> pairsPerMission;
+    private ProgramSwitch programSwitch;
 
     public PairProgram() {
         this.pairsPerMission = new HashMap<>();
+    }
+
+    public Pairs pairMatch(final PairMission pairMission) {
+        Crews crews = generateShuffledCrews(pairMission);
+        Pairs currentPairs = match(crews);
+        currentPairs = checkValidPairs(pairMission, crews, currentPairs);
+        register(pairMission, currentPairs);
+        return getCurrentMissionPairs(pairMission);
     }
 
     public Crews generateShuffledCrews(final PairMission pairMission) {
@@ -23,7 +32,7 @@ public class PairProgram {
     }
 
     public Crews generateShuffledCrews(final Course course) {
-        final List<String> crewNames = FileReader.readFrom(course.getResourcePath());
+        final List<String> crewNames = FileReaderUtil.read(course.getResourcePath());
         final List<String> shuffledCrew = Randoms.shuffle(crewNames);
         return Crews.from(course, shuffledCrew);
     }
@@ -33,7 +42,6 @@ public class PairProgram {
     }
 
     public boolean isExistedMatching(final PairMission pairMission) {
-//        return pairsPerMission.get(pairMission) != null;
         return pairsPerMission.containsKey(pairMission);
     }
 
@@ -45,29 +53,11 @@ public class PairProgram {
             .filter(sameLevelMission -> pairMission != sameLevelMission)
             .collect(Collectors.toList());
 
-//        final List<Pairs> sameLevelPairs = sameLevelMissions.stream()
-//            .map(pairsPerMission::get)
-//            .collect(Collectors.toList());
-
         return sameLevelMissions.stream()
             .map(pairsPerMission::get)
             .anyMatch(sameLevelPairs -> sameLevelPairs.hasSamePair(
                 pairs)); // stream안에서도 단순컬렉션이 아니였으면 메세지를 보낼 수 있엇다. -> 단순컬렉션은 메세지를 못보내니 일급으로 만들 것
 
-//        for (final List<Pair> sameLevelPairs : sameLevelPairsList) {
-//            for (final Pair sameLevelPair : sameLevelPairs) {
-//                for (final Pair pair : pairs) {
-//                    sameLevelPair.isSame(pair);
-//                }
-//            }
-//            for (final Pair pair : pairs) {
-//                if (sameLevelPairs.contains(pair)) {
-//                    return true;
-//                }
-//            }
-//        }
-
-//        return false;
     }
 
     public void register(final PairMission pairMission, final Pairs pairs) {
@@ -92,5 +82,17 @@ public class PairProgram {
 
     public Pairs getCurrentMissionPairs(final PairMission pairMission) {
         return pairsPerMission.get(pairMission);
+    }
+
+    public void initPairs() {
+        pairsPerMission = new HashMap<>();
+    }
+
+    public void switchOff() {
+        this.programSwitch = ProgramSwitch.off();
+    }
+
+    public boolean isOff() {
+        return programSwitch == ProgramSwitch.OFF;
     }
 }

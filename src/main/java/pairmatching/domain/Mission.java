@@ -30,6 +30,6 @@ public enum Mission {
         return Arrays.stream(Mission.values())
             .filter(it -> it.name.equals(name))
             .findFirst()
-            .orElseThrow(()->new IllegalArgumentException("존재하지 않는 mission입니다."));
+            .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 mission입니다."));
     }
 }

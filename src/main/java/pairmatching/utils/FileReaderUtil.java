@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileReader {
-    public static List<String> readFrom(final String pathname) {
+public class FileReaderUtil {
+    public static List<String> read(final String pathname) {
         final File file = new File(pathname);
         final List<String> crews = new ArrayList<>();
         try {
