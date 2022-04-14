@@ -15,6 +15,11 @@ public class OutputView {
             }
             System.out.printf("%s : %s : %s", pairDto.getFirst(), pairDto.getSecond(), pairDto.getThird());
             System.out.println();
+            System.out.println();
         }
+    }
+
+    public void printNoMatchedPairs() {
+        System.out.println("매칭 이력이 없는 미션입니다.");
     }
 }

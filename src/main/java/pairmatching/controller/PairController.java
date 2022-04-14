@@ -46,10 +46,23 @@ public class PairController {
                 // TODO [매칭후 검증까지 성공]했다면, [프로그램 상태값으로 가진 db인 PairsPerMission에 pais를 등록]해준다.
                 pairProgram.register(pairMission, currentPairs);
                 // TODO [db인 PairsPerMission에 pairs를 등록후 출력까지]해준다.
-                final PairsDto pairsDto = PairsDto.from(pairProgram.getCurrentMissionPairs(pairMission));
+                printCurrentMissionPairs(pairProgram, pairMission);
+            }
 
-                outputView.printCurrentMissionPairs(pairsDto);
+            if (menu == Menu.MENU_2) {
+                final String mission = inputView.inputPairMatch();
+                final PairMission pairMission = new PairMission(mission);
+                if (pairProgram.isExistedMatching(pairMission)) {
+                    printCurrentMissionPairs(pairProgram, pairMission);
+                    continue; // 반복문 속에서의 ealry return
+                }
+                outputView.printNoMatchedPairs();
             }
         }
+    }
+
+    private void printCurrentMissionPairs(final PairProgram pairProgram, final PairMission pairMission) {
+        final PairsDto pairsDto = PairsDto.from(pairProgram.getCurrentMissionPairs(pairMission));
+        outputView.printCurrentMissionPairs(pairsDto);
     }
 }
