@@ -25,4 +25,8 @@ public class Pairs {
         return value.stream()
             .anyMatch(pair -> OtherPair.isSame(pair));
     }
+
+    public List<Pair> getValue() {
+        return value;
+    }
 }

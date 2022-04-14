@@ -61,7 +61,7 @@ public class Pair {
         return allCrews.containsAll(pair.getAllCrews());
     }
 
-    private List<Crew> getAllCrews() {
+    public List<Crew> getAllCrews() {
         Stream<Crew> crews = Stream.of(first, second);
         if (third != null) {
             crews = Stream.concat(crews, Stream.of(third));
@@ -69,13 +69,15 @@ public class Pair {
         return crews.collect(Collectors.toList());
     }
 
-    private boolean isSamePairFirstAndSecond(final Pair pair) {
-        if (first.equals(pair.first) && second.equals(pair.second)) {
-            return true;
-        }
-        if (first.equals(pair.second) && second.equals(pair.first)) {
-            return true;
-        }
-        return false;
+    public Crew getFirst() {
+        return first;
+    }
+
+    public Crew getSecond() {
+        return second;
+    }
+
+    public Crew getThird() {
+        return third;
     }
 }

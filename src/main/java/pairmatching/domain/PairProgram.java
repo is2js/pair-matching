@@ -89,5 +89,8 @@ public class PairProgram {
         }
         return currentPairs;
     }
-}
+
+    public Pairs getCurrentMissionPairs(final PairMission pairMission) {
+        return pairsPerMission.get(pairMission);
+    }
 }

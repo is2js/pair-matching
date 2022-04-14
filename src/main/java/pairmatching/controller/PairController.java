@@ -6,6 +6,7 @@ import pairmatching.domain.Menu;
 import pairmatching.domain.PairMission;
 import pairmatching.domain.PairProgram;
 import pairmatching.domain.Pairs;
+import pairmatching.dto.PairsDto;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 
@@ -27,6 +28,7 @@ public class PairController {
 
             if (menu == Menu.MENU_1) {
                 final String mission = inputView.inputPairMatch();
+
                 final PairMission pairMission = new PairMission(mission);
                 //TODO [매칭전] pairMission을 가지고 매칭정보 잇는지 확인해야함 -> 이것들을 모아놓는 DB역할의 컬력션이 있고, 중복검사도 해야함.
                 // -> pairMission별 매칭이력 존재하면 map에 value True?
@@ -44,7 +46,9 @@ public class PairController {
                 // TODO [매칭후 검증까지 성공]했다면, [프로그램 상태값으로 가진 db인 PairsPerMission에 pais를 등록]해준다.
                 pairProgram.register(pairMission, currentPairs);
                 // TODO [db인 PairsPerMission에 pairs를 등록후 출력까지]해준다.
+                final PairsDto pairsDto = PairsDto.from(pairProgram.getCurrentMissionPairs(pairMission));
 
+                outputView.printCurrentMissionPairs(pairsDto);
             }
         }
     }
