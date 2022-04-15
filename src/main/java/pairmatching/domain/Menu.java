@@ -2,11 +2,11 @@ package pairmatching.domain;
 
 import java.util.Arrays;
 import java.util.function.Supplier;
-import pairmatching.domain.menu.CommandMenu;
-import pairmatching.domain.menu.PairExit;
-import pairmatching.domain.menu.PairInit;
-import pairmatching.domain.menu.PairMatch;
-import pairmatching.domain.menu.PairSelect;
+import pairmatching.domain.commandmenu.CommandMenu;
+import pairmatching.domain.commandmenu.PairExit;
+import pairmatching.domain.commandmenu.PairInit;
+import pairmatching.domain.commandmenu.PairMatch;
+import pairmatching.domain.commandmenu.PairSelect;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 

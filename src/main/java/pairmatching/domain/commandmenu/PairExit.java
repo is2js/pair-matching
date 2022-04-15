@@ -1,4 +1,4 @@
-package pairmatching.domain.menu;
+package pairmatching.domain.commandmenu;
 
 import pairmatching.domain.PairProgram;
 import pairmatching.view.InputView;

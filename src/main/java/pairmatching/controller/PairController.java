@@ -16,10 +16,21 @@ public class PairController {
 
     public void run() {
         final PairProgram pairProgram = new PairProgram();
+        start(pairProgram);
+    }
 
-        while (!pairProgram.isOff()) {
+    private void start(final PairProgram pairProgram) {
+        if (pairProgram.isOff()) {
+            return;
+        }
+        try {
             final Menu menu = Menu.from(inputView.inputMenu());
             menu.execute(inputView, outputView, pairProgram);
+            start(pairProgram);
+        } catch (Exception e) {
+            System.out.println("[ERROR]" + e.getMessage());
+
+            start(pairProgram);
         }
     }
 }
