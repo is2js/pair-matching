@@ -13,8 +13,7 @@ public class PairMatch implements CommandMenu {
     @Override
     public void execute(final InputView inputView, final OutputView outputView, final PairProgram pairProgram) {
         final PairMission pairMission = new PairMission(inputView.inputPairMission());
-        final AnswerMenu answer = AnswerMenu.from(inputView.inputRematch());
-        if (pairProgram.isExistedMatching(pairMission) && answer.isNo()) {
+        if (pairProgram.isExistedMatching(pairMission) && AnswerMenu.from(inputView.inputRematch()).isNo()) {
             return;
         }
         final Pairs currentMissionPairs = pairProgram.pairMatch(pairMission);
