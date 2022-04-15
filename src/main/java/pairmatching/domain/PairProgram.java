@@ -14,6 +14,7 @@ public class PairProgram {
 
     public PairProgram() {
         this.pairsPerMission = new HashMap<>();
+        this.programSwitch = ProgramSwitch.ON;
     }
 
     public Pairs pairMatch(final PairMission pairMission) {
@@ -94,5 +95,8 @@ public class PairProgram {
 
     public boolean isOff() {
         return programSwitch == ProgramSwitch.OFF;
+    }
+
+    public void execute(final Menu menu) {
     }
 }
